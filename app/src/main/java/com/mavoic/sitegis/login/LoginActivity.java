@@ -6,6 +6,8 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +22,11 @@ import android.widget.LinearLayout;
 import com.mavoic.core.activitys.BaseActivity;
 import com.mavoic.sitegis.MainActivity;
 import com.mavoic.sitegis.R;
+import com.mavoic.sitegis.data.LoginData;
+import com.mavoic.sitegis.databinding.ActivityLoginBinding;
+import com.mavoic.sitegis.databinding.ActivityLoginInputBinding;
+
+import java.util.Random;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -33,11 +40,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private LinearLayout mName, mPsw;
 
+    private ActivityLoginBinding binding ;
 
+    private LoginData loginData ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        binding = DataBindingUtil.setContentView(this,getLayoutId());
         initView();
+
+        loginData = new LoginData();
+        loginData.setUserName("test");
+
+        binding.setModel(loginData);
     }
 
     @Override
@@ -52,13 +68,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initView() {
-        mBtnLogin = (Button) findViewById(R.id.main_btn_login);
-        progress = findViewById(R.id.layout_progress);
-        mInputLayout = findViewById(R.id.input_layout);
-        mName = (LinearLayout) findViewById(R.id.input_layout_name);
-        mPsw = (LinearLayout) findViewById(R.id.input_layout_psw);
+        mBtnLogin = binding.mainBtnLogin;
+        progress = binding.layoutProgress;
+        mInputLayout = binding.inputLayout.getRoot();
+
+
+        mName = binding.inputLayout.inputLayoutName;
+        mPsw =binding.inputLayout.inputLayoutPsw;
 
         mBtnLogin.setOnClickListener(this);
+        binding.mainBtnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                loginData.setUserName("user"+ System.currentTimeMillis());
+
+            }
+        });
     }
 
     /**
@@ -173,23 +199,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
 
-        if(isLogin){
-            isLogin=false;
-            recovery();
-        }else{
-            isLogin=true;
-            // 计算出控件的高与宽
-            mWidth = mBtnLogin.getMeasuredWidth();
-            mHeight = mBtnLogin.getMeasuredHeight();
-            // 隐藏输入框
-            mName.setVisibility(View.INVISIBLE);
-            mPsw.setVisibility(View.INVISIBLE);
-
-            inputAnimator(mInputLayout, mWidth, mHeight);
-        }
-
-
-        handler.sendEmptyMessageDelayed(LOGIN_WAIT,2000);
+        Log.d(LoginActivity.class.getName(),"测试日志信息");
+        Log.d(LoginActivity.class.getName(),loginData.getUserName());
+        Log.d(LoginActivity.class.getName(),loginData.getPassword());
+//        if(isLogin){
+//            isLogin=false;
+//            recovery();
+//        }else{
+//            isLogin=true;
+//            // 计算出控件的高与宽
+//            mWidth = mBtnLogin.getMeasuredWidth();
+//            mHeight = mBtnLogin.getMeasuredHeight();
+//            // 隐藏输入框
+//            mName.setVisibility(View.INVISIBLE);
+//            mPsw.setVisibility(View.INVISIBLE);
+//
+//            inputAnimator(mInputLayout, mWidth, mHeight);
+//        }
+//
+//
+//        handler.sendEmptyMessageDelayed(LOGIN_WAIT,2000);
 
 
     }

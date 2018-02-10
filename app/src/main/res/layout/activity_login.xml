@@ -1,112 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context="com.mavoic.sitegis.login.LoginActivity">
+<layout>
+    <data>
+        <variable
+            name="model"
+            type="com.mavoic.sitegis.data.LoginData"></variable>
+    </data>
 
-    <LinearLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="55dip"
-            android:layout_height="55dip"
-            android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_launcher" />
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context="com.mavoic.sitegis.login.LoginActivity">
 
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/login_phase"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
-    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/relativeLayout">
-
-        <include
-            android:id="@+id/input_layout"
-            layout="@layout/input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="130dip" />
-
-        <include
-            android:id="@+id/layout_progress"
-            layout="@layout/layout_progress"
-            android:layout_width="match_parent"
-            android:layout_height="130dip"
-            android:visibility="gone" />
-
-
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/input_layout"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="55dip"
+                android:layout_height="55dip"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_launcher" />
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/login_phase"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:id="@+id/relativeLayout">
 
-            <Button
-                android:id="@+id/main_btn_login"
-                android:layout_width="wrap_content"
+            <include
+                android:id="@+id/input_layout"
+                layout="@layout/activity_login_input"
+                android:layout_width="match_parent"
+                android:layout_height="130dip"
+                bind:model="@{model}"/>
+
+            <include
+                android:id="@+id/layout_progress"
+                layout="@layout/layout_progress"
+                android:layout_width="match_parent"
+                android:layout_height="130dip"
+                android:visibility="gone" />
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/input_layout"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                android:layout_marginRight="32dp"
-                android:background="@drawable/text_bg"
-                android:elevation="5dp"
-                android:paddingBottom="2dip"
-                android:paddingLeft="15dip"
-                android:paddingRight="15dip"
-                android:paddingTop="2dip"
-                android:text="@string/login"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                tools:layout_editor_absoluteY="0dp" />
+                <Button
+                    android:id="@+id/main_btn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-            <Button
-                android:id="@+id/main_btn_signup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:background="@drawable/text_bg"
+                    android:elevation="5dp"
+                    android:paddingBottom="2dip"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="15dip"
+                    android:paddingTop="2dip"
+                    android:text="@string/login"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    tools:layout_editor_absoluteY="0dp" />
 
-                android:layout_marginRight="32dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/text_bg"
-                android:elevation="4dp"
-                android:paddingBottom="2dip"
-                android:paddingLeft="15dip"
-                android:paddingRight="15dip"
-                android:paddingTop="2dip"
-                android:text="@string/sign_up"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                tools:layout_editor_absoluteY="0dp" />
+                <Button
+                    android:id="@+id/main_btn_signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="1dp"
-                android:layout_height="1dp"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.5"  />
+                    android:layout_marginRight="32dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/text_bg"
+                    android:elevation="4dp"
+                    android:paddingBottom="2dip"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="15dip"
+                    android:paddingTop="2dip"
+                    android:text="@string/sign_up"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    tools:layout_editor_absoluteY="0dp" />
 
-        </android.support.constraint.ConstraintLayout>
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5"  />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+
+        </RelativeLayout>
 
 
 
     </RelativeLayout>
 
-
-
-</RelativeLayout>
+</layout>
